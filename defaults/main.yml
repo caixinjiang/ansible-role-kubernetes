@@ -20,15 +20,20 @@ kubernetes_join_command_extra_opts: ""
 
 kubernetes_allow_pods_on_master: true
 kubernetes_enable_web_ui: true
-kubernetes_web_ui_manifest_file: https://raw.githubusercontent.com/kubernetes/dashboard/v1.10.1/src/deploy/recommended/kubernetes-dashboard.yaml
+kubernetes_web_ui_manifest_file: https://raw.githubusercontent.com/kubernetes/dashboard/v2.0.0-rc6/aio/deploy/recommended.yaml
+# dashboard token: kubectl -n kubernetes-dashboard describe secret `kubectl -n kubernetes-dashboard get secret | grep dashboard-token | awk '{print $1}'` | grep token
 
 kubernetes_pod_network:
   # Flannel CNI.
-  cni: 'flannel'
-  cidr: '10.244.0.0/16'
+  # cni: 'flannel'
+  # cidr: '10.244.0.0/16'
   # Calico CNI.
   # cni: 'calico'
   # cidr: '192.168.0.0/16'
+  # Weave CNI.
+  cni: 'weave'
+  cidr: '10.244.0.0/16'
+
 
 kubernetes_apiserver_advertise_address: ''
 kubernetes_version_kubeadm: 'stable-{{ kubernetes_version }}'
@@ -47,3 +52,6 @@ kubernetes_flannel_manifest_file: https://raw.githubusercontent.com/coreos/flann
 
 # Calico config files
 kubernetes_calico_manifest_file: https://docs.projectcalico.org/v3.10/manifests/calico.yaml
+
+# Weave config files
+kubernetes_weave_manifest_file: https://cloud.weave.works/k8s/net?k8s-version={{kubernetes_version}}
