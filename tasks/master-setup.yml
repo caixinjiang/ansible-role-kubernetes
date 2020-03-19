@@ -74,3 +74,13 @@
   when:
     - kubernetes_enable_web_ui | bool
     - kubernetes_dashboard_service.rc > 0
+
+- name: Configure Rook Ceph storage.
+  command: "{{ item }}"
+  with_items:
+    - kubectl apply -f {{ kubernetes_rook_ceph_file_common }}
+    - kubectl apply -f {{ kubernetes_rook_ceph_file_operator }}
+    - kubectl apply -f {{ kubernetes_rook_ceph_file_cluster }}
+  register: rook_ceph_result
+  changed_when: "'created' in rook_ceph_result.stdout"
+  when: kubernetes_enable_rook_ceph | bool

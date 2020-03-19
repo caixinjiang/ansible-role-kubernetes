@@ -55,3 +55,9 @@ kubernetes_calico_manifest_file: https://docs.projectcalico.org/v3.10/manifests/
 
 # Weave config files
 kubernetes_weave_manifest_file: https://cloud.weave.works/k8s/net?k8s-version={{kubernetes_version}}
+
+# rook ceph
+kubernetes_enable_rook_ceph: false
+kubernetes_rook_ceph_file_common: https://raw.githubusercontent.com/rook/rook/release-1.2/cluster/examples/kubernetes/ceph/common.yaml
+kubernetes_rook_ceph_file_operator: https://raw.githubusercontent.com/rook/rook/release-1.2/cluster/examples/kubernetes/ceph/operator.yaml
+kubernetes_rook_ceph_file_cluster: https://raw.githubusercontent.com/rook/rook/release-1.2/cluster/examples/kubernetes/ceph/cluster.yaml
