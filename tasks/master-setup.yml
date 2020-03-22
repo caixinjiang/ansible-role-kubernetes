@@ -84,3 +84,12 @@
   register: rook_ceph_result
   changed_when: "'created' in rook_ceph_result.stdout"
   when: kubernetes_enable_rook_ceph | bool
+
+- name: Configure Ingress Nginx.
+  command: "{{ item }}"
+  with_items:
+    - kubectl apply -f {{ kubernetes_ingree_nginx_file_mandatory }}
+    - kubectl apply -f {{ kubernetes_ingree_nginx_file_provider }}
+  register: ingress_nginx_result
+  changed_when: "'created' in ingress_nginx_result.stdout"
+  when: kubernetes_enable_ingress_nginx | bool
